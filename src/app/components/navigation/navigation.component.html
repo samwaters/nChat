@@ -1,0 +1,11 @@
+<md-toolbar color="primary">
+  <span>
+    {{title}}
+    <button md-button *ngFor="let link of links" (click)="navigate(link.href)">
+      <span>{{link.title}}</span>
+    </button>
+  </span>
+  <button md-button md-ripple>
+    <span>Log Out</span>
+  </button>
+</md-toolbar>
