@@ -16,6 +16,8 @@ import {userReducer} from './reducers/user.reducer';
 import {compose} from '@ngrx/core/compose';
 import {FlexDirective, LayoutDirective} from './directives/flex.directive';
 import { UserComponent } from './components/user/user.component';
+import {EffectsModule} from '@ngrx/effects';
+import {UserEffects} from './effects/user.effects';
 
 @NgModule({
   declarations: [
@@ -32,6 +34,7 @@ import { UserComponent } from './components/user/user.component';
     FormsModule,
     HttpModule,
     MaterialModule.forRoot(),
+    EffectsModule.run(UserEffects),
     StoreModule.provideStore(
       compose(storeLogger(), combineReducers)({users: userReducer})
     )

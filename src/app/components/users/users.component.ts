@@ -10,7 +10,7 @@ import {Observable} from 'rxjs';
 export class UsersComponent implements OnInit {
 
   constructor(private userService:UserService) {
-
+    this.userService.requestUserList();
   }
 
   public get users():Observable<any> {

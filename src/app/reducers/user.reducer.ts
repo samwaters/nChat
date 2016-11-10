@@ -8,6 +8,7 @@ const userActionTypes = {
 interface IUserActions {
   addUser:Function;
   removeUser:Function;
+  setUsers:Function;
 }
 
 export const userActions:IUserActions = {
@@ -31,7 +32,7 @@ export const userActions:IUserActions = {
   }
 };
 
-export const userReducer:ActionReducer<Array<any>> = (state:Array<any> = ['a', 'b', 'c'], action:Action) => {
+export const userReducer:ActionReducer<Array<any>> = (state:Array<any> = [], action:Action) => {
   switch(action.type) {
     case userActionTypes.ADD_USER:
       return [...state, action.payload];
