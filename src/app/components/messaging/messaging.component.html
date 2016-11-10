@@ -1,3 +1,7 @@
-<p>
-  messaging works!
-</p>
+<div class="container">
+  <div class="messages">
+    <app-message *ngFor="let message of (messages | async)" [message]="message"></app-message>
+  </div>
+  <app-messaging-input (send)="onSend($event)"></app-messaging-input>
+</div>
+
