@@ -18,6 +18,11 @@ import {FlexDirective, LayoutDirective} from './directives/flex.directive';
 import { UserComponent } from './components/user/user.component';
 import {EffectsModule} from '@ngrx/effects';
 import {UserEffects} from './effects/user.effects';
+import { MessagingInputComponent } from './components/messaging-input/messaging-input.component';
+import {MessageService} from './services/message.service';
+import {messageReducer} from './reducers/message.reducer';
+import {MessageEffects} from './effects/message.effects';
+import { MessageComponent } from './components/message/message.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +32,9 @@ import {UserEffects} from './effects/user.effects';
     MessagingComponent,
     FlexDirective,
     LayoutDirective,
-    UserComponent
+    UserComponent,
+    MessagingInputComponent,
+    MessageComponent
   ],
   imports: [
     BrowserModule,
@@ -35,11 +42,12 @@ import {UserEffects} from './effects/user.effects';
     HttpModule,
     MaterialModule.forRoot(),
     EffectsModule.run(UserEffects),
+    EffectsModule.run(MessageEffects),
     StoreModule.provideStore(
-      compose(storeLogger(), combineReducers)({users: userReducer})
+      compose(storeLogger(), combineReducers)({messages:messageReducer, users: userReducer})
     )
   ],
-  providers: [UserService, WebsocketService],
+  providers: [UserService, WebsocketService, MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

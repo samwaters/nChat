@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import {UserService} from './user.service';
+import {MessageService} from './message.service';
 
 @Injectable()
 export class WebsocketService {
   private _queue:Array<string> = [];
   private _socket:WebSocket;
 
-  constructor(private userService:UserService) {
+  constructor(private userService:UserService, private messageService:MessageService) {
     this.connect();
   }
 
@@ -49,7 +50,7 @@ export class WebsocketService {
     try {
       let decoded = JSON.parse(message);
       if(decoded.type === 0) {
-        console.log('Got a message!', decoded);
+        this.messageService.onMessageReceived(decoded);
       } else if(decoded.type === 1) {
         switch(decoded.command) {
           case 0:

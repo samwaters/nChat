@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 import {userActions} from '../reducers/user.reducer';
 
 interface AppState {
+  messages: Array<any>;
   users: Array<any>;
 }
 
