@@ -1,0 +1,8 @@
+<div layout="row">
+  <div flex="80">
+    <md-input placeholder="Enter Message" [(ngModel)]="currentMessage" (keyup.enter)="sendMessage()"></md-input>
+  </div>
+  <div flex="20">
+    <button md-raised-button (click)="sendMessage()">Send Message</button>
+  </div>
+</div>
