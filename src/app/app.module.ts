@@ -23,6 +23,12 @@ import {MessageService} from './services/message.service';
 import {messageReducer} from './reducers/message.reducer';
 import {MessageEffects} from './effects/message.effects';
 import { MessageComponent } from './components/message/message.component';
+import { SignupComponent } from './components/signup/signup.component';
+import { LoginComponent } from './components/login/login.component';
+import { ChatComponent } from './components/chat/chat.component';
+import { AuthComponent } from './components/auth/auth.component';
+import {routing} from './app.routes';
+import {ThemeService} from './services/theme.service';
 
 @NgModule({
   declarations: [
@@ -34,12 +40,17 @@ import { MessageComponent } from './components/message/message.component';
     LayoutDirective,
     UserComponent,
     MessagingInputComponent,
-    MessageComponent
+    MessageComponent,
+    SignupComponent,
+    LoginComponent,
+    ChatComponent,
+    AuthComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
+    routing,
     MaterialModule.forRoot(),
     EffectsModule.run(UserEffects),
     EffectsModule.run(MessageEffects),
@@ -47,7 +58,7 @@ import { MessageComponent } from './components/message/message.component';
       compose(storeLogger(), combineReducers)({messages:messageReducer, users: userReducer})
     )
   ],
-  providers: [UserService, WebsocketService, MessageService],
+  providers: [UserService, WebsocketService, MessageService, ThemeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

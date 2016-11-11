@@ -1,0 +1,12 @@
+@import '~@angular/material/core/theming/all-theme';
+
+@include md-core();
+
+@import '~@angular/material/core/theming/prebuilt/deeppurple-amber.scss';
+
+.theme2 {
+  @import '~@angular/material/core/theming/prebuilt/purple-green.scss';
+}
+.theme3 {
+  @import '~@angular/material/core/theming/prebuilt/indigo-pink.scss';
+}
