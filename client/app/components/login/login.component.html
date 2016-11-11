@@ -1,0 +1,19 @@
+<div layout="row">
+  <div flex="30"></div>
+  <md-card flex="40">
+    <md-card-title>Log In</md-card-title>
+    <md-card-content>
+      <p>
+        <md-input [(ngModel)]="email" placeholder="E-Mail"></md-input>
+      </p>
+      <p>
+        <md-input type="password" [(ngModel)]="password" placeholder="Password"></md-input>
+      </p>
+    </md-card-content>
+    <md-card-actions>
+      <button md-raised-button color="primary" (click)="login">Log In</button>
+    </md-card-actions>
+  </md-card>
+  <div flex="30"></div>
+</div>
+
