@@ -5,7 +5,18 @@
       <span>{{link.title}}</span>
     </button>
   </span>
-  <button md-button md-ripple>
+  <span>
+    <button md-button [md-menu-trigger-for]="menu">
+      <span>Theme</span>
+    </button>
+    <button md-button md-ripple>
     <span>Log Out</span>
   </button>
+  </span>
 </md-toolbar>
+<md-menu x-position="before" #menu="mdMenu">
+  <button md-menu-item *ngFor="let item of themes" (click)="changeTheme(item.className)">
+    {{item.name}}
+    <md-icon *ngIf="theme === item.className">done</md-icon>
+  </button>
+</md-menu>
