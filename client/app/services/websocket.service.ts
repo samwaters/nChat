@@ -8,7 +8,7 @@ export class WebsocketService {
   private _socket:WebSocket;
 
   constructor(private userService:UserService, private messageService:MessageService) {
-    this.connect();
+    //this.connect();
   }
 
   public connect() {
