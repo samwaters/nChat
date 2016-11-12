@@ -1,6 +1,6 @@
 import {TextMessage} from './messages/text.message';
 import {IMessage, MessageTypes, MessageCommands} from './messages/message.interface';
-import {config} from './config';
+import {config} from '../config/server.config';
 import * as WebSocket from 'ws';
 import {Server as WSServer} from 'ws';
 import {ErrorMessage} from './messages/error.message';

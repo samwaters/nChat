@@ -4,6 +4,8 @@
 
 @import '~@angular/material/core/theming/prebuilt/deeppurple-amber.scss';
 
+.error { color: md-color($md-red, 500, 1); }
+
 .theme2 {
   @import '~@angular/material/core/theming/prebuilt/purple-green.scss';
 }

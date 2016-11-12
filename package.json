@@ -25,15 +25,21 @@
     "@ngrx/core": "^1.2.0",
     "@ngrx/effects": "^2.0.0",
     "@ngrx/store": "^2.2.1",
+    "angularfire2": "^2.0.0-beta.6",
     "core-js": "^2.4.1",
+    "firebase-admin": "^4.0.1",
     "ngrx-store-logger": "^0.1.7",
     "rxjs": "5.0.0-beta.12",
     "ts-helpers": "^1.1.1",
-    "zone.js": "^0.6.23",
-    "ws": "^1.1.1"
+    "ws": "^1.1.1",
+    "zone.js": "^0.6.23"
   },
   "devDependencies": {
+    "@types/firebase": "^2.4.30",
     "@types/jasmine": "^2.2.30",
+    "@types/node": "^6.0.46",
+    "@types/q": "0.0.32",
+    "@types/ws": "0.0.35",
     "angular-cli": "1.0.0-beta.19-3",
     "codelyzer": "1.0.0-beta.1",
     "jasmine-core": "2.4.1",
@@ -43,13 +49,11 @@
     "karma-cli": "^1.0.1",
     "karma-jasmine": "^1.0.2",
     "karma-remap-istanbul": "^0.2.1",
-    "protractor": "4.0.9",
-    "tslint": "3.13.0",
-    "webdriver-manager": "10.2.5",
-    "@types/node": "^6.0.46",
-    "@types/ws": "0.0.35",
     "nodemon": "^1.11.0",
+    "protractor": "4.0.9",
     "ts-node": "^1.7.0",
-    "typescript": "^2.0.8"
+    "tslint": "3.13.0",
+    "typescript": "^2.0.8",
+    "webdriver-manager": "10.2.5"
   }
 }

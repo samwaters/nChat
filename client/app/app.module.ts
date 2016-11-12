@@ -29,6 +29,10 @@ import { ChatComponent } from './components/chat/chat.component';
 import { AuthComponent } from './components/auth/auth.component';
 import {routing} from './app.routes';
 import {ThemeService} from './services/theme.service';
+import {AngularFireModule} from 'angularfire2';
+import {firebaseConfig, firebaseAuthConfig} from '../../config/firebase.config';
+import {FirebaseService} from './services/firebase.service';
+import {ChatAuthGuard} from './guards/chat.guard';
 
 @NgModule({
   declarations: [
@@ -56,9 +60,10 @@ import {ThemeService} from './services/theme.service';
     EffectsModule.run(MessageEffects),
     StoreModule.provideStore(
       compose(storeLogger(), combineReducers)({messages:messageReducer, users: userReducer})
-    )
+    ),
+    AngularFireModule.initializeApp(firebaseConfig, firebaseAuthConfig)
   ],
-  providers: [UserService, WebsocketService, MessageService, ThemeService],
+  providers: [UserService, WebsocketService, MessageService, ThemeService, FirebaseService, ChatAuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

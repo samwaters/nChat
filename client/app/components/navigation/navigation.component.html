@@ -1,22 +1,29 @@
 <md-toolbar color="primary">
   <span>
     {{title}}
-    <button md-button *ngFor="let link of links" (click)="navigate(link.href)">
-      <span>{{link.title}}</span>
-    </button>
+    <span *ngIf="auth">
+      <button md-button *ngFor="let link of links" (click)="navigate(link.href)">
+        <span>{{link.title}}</span>
+      </button>
+    </span>
   </span>
   <span>
-    <button md-button [md-menu-trigger-for]="menu">
+    <button md-button [md-menu-trigger-for]="themeMenu">
       <span>Theme</span>
     </button>
-    <button md-button md-ripple>
-    <span>Log Out</span>
+    <button md-button md-ripple *ngIf="auth" [md-menu-trigger-for]="userMenu">
+    <span>{{auth.auth.email}}</span>
   </button>
   </span>
 </md-toolbar>
-<md-menu x-position="before" #menu="mdMenu">
+<md-menu x-position="before" #themeMenu="mdMenu">
   <button md-menu-item *ngFor="let item of themes" (click)="changeTheme(item.className)">
     {{item.name}}
     <md-icon *ngIf="theme === item.className">done</md-icon>
+  </button>
+</md-menu>
+<md-menu x-position="before" #userMenu="mdMenu">
+  <button md-menu-item (click)="logOut()">
+    Log Out
   </button>
 </md-menu>

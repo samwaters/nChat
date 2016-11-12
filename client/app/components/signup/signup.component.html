@@ -3,6 +3,9 @@
   <md-card flex="40">
     <md-card-title>Sign Up</md-card-title>
     <md-card-content>
+      <p *ngIf="hasError" class="error">
+        <strong>Error:</strong> {{errorMessage}}
+      </p>
       <p>
         <md-input [(ngModel)]="name" placeholder="Name"></md-input>
       </p>
@@ -14,7 +17,7 @@
       </p>
     </md-card-content>
     <md-card-actions>
-      <button md-raised-button color="primary" (click)="login">Sign Up</button>
+      <button md-raised-button color="primary" (click)="signUp()">Sign Up</button>
     </md-card-actions>
   </md-card>
   <div flex="30"></div>

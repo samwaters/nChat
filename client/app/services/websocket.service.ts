@@ -12,6 +12,9 @@ export class WebsocketService {
   }
 
   public connect() {
+    if(this.isConnected()) {
+      return;
+    }
     this._socket = new WebSocket('ws://localhost:9002');
     this._socket.onmessage = (ev:MessageEvent) => {
       this._handleMessage(ev.data);
@@ -27,8 +30,10 @@ export class WebsocketService {
   }
 
   public disconnect() {
-    this._socket.close();
-    this._socket = null;
+    if(this._socket) {
+      this._socket.close();
+      this._socket = null;
+    }
   }
 
   public isConnected():boolean {
