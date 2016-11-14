@@ -33,6 +33,8 @@ import {AngularFireModule} from 'angularfire2';
 import {firebaseConfig, firebaseAuthConfig} from '../../config/firebase.config';
 import {FirebaseService} from './services/firebase.service';
 import {ChatAuthGuard} from './guards/chat.guard';
+import { CaptchaComponent } from './components/captcha/captcha.component';
+import {CaptchaService} from './services/captcha.service';
 
 @NgModule({
   declarations: [
@@ -48,7 +50,8 @@ import {ChatAuthGuard} from './guards/chat.guard';
     SignupComponent,
     LoginComponent,
     ChatComponent,
-    AuthComponent
+    AuthComponent,
+    CaptchaComponent
   ],
   imports: [
     BrowserModule,
@@ -63,7 +66,7 @@ import {ChatAuthGuard} from './guards/chat.guard';
     ),
     AngularFireModule.initializeApp(firebaseConfig, firebaseAuthConfig)
   ],
-  providers: [UserService, WebsocketService, MessageService, ThemeService, FirebaseService, ChatAuthGuard],
+  providers: [UserService, WebsocketService, MessageService, ThemeService, FirebaseService, CaptchaService, ChatAuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

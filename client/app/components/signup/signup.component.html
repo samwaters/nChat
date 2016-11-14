@@ -7,17 +7,20 @@
         <strong>Error:</strong> {{errorMessage}}
       </p>
       <p>
-        <md-input [(ngModel)]="name" placeholder="Name"></md-input>
+        <md-input [(ngModel)]="name" (keyup)="validateForm()" placeholder="Name"></md-input>
       </p>
       <p>
-        <md-input [(ngModel)]="email" placeholder="E-Mail"></md-input>
+        <md-input [(ngModel)]="email" (keyup)="validateForm()" placeholder="E-Mail"></md-input>
       </p>
       <p>
-        <md-input type="password" [(ngModel)]="password" placeholder="Password"></md-input>
+        <md-input type="password" [(ngModel)]="password" (keyup)="validateForm()" placeholder="Password"></md-input>
+      </p>
+      <p>
+        <app-captcha [siteKey]="recaptchaKey" (captchaResponse)="captchaResponse($event)" (captchaExpired)="captchaExpired($event)"></app-captcha>
       </p>
     </md-card-content>
     <md-card-actions>
-      <button md-raised-button color="primary" (click)="signUp()">Sign Up</button>
+      <button md-raised-button color="primary" (click)="signUp()" [disabled]="!(formIsValid | async)">Sign Up</button>
     </md-card-actions>
   </md-card>
   <div flex="30"></div>
