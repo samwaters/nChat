@@ -4,7 +4,7 @@ import {FirebaseAuthState} from 'angularfire2';
 import {Router} from '@angular/router';
 import {WebsocketService} from '../../services/websocket.service';
 import {clientConfig} from '../../../../config/client.config';
-import {MaterialInputComponent} from '../ui/material-input/material-input.component';
+import {MaterialInputComponent} from '../input/material-input/material-input.component';
 
 interface IMaterialElementRef extends ElementRef {
   _elementRef?:ElementRef;
