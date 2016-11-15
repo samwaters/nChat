@@ -3,24 +3,56 @@
   <md-card flex="40">
     <md-card-title>Sign Up</md-card-title>
     <md-card-content>
-      <p *ngIf="hasError" class="error">
-        <strong>Error:</strong> {{errorMessage}}
-      </p>
-      <p>
-        <md-input [(ngModel)]="name" (keyup)="validateForm()" placeholder="Name"></md-input>
-      </p>
-      <p>
-        <md-input [(ngModel)]="email" (keyup)="validateForm()" placeholder="E-Mail"></md-input>
-      </p>
-      <p>
-        <md-input type="password" [(ngModel)]="password" (keyup)="validateForm()" placeholder="Password"></md-input>
-      </p>
-      <p>
-        <app-captcha [siteKey]="recaptchaKey" (captchaResponse)="captchaResponse($event)" (captchaExpired)="captchaExpired($event)"></app-captcha>
-      </p>
+      <form #form="ngForm">
+        <p *ngIf="hasError" class="error">
+          <strong>Error:</strong> {{errorMessage}}
+        </p>
+        <app-material-input
+          name="captcha"
+          ngDefaultControl
+          type="hidden"
+          [hidden]="true"
+          [ngModel]="captcha"
+          [required]="true"
+          [(value)]="captcha"
+        ></app-material-input>
+        <app-material-input
+          name="name"
+          ngDefaultControl
+          minlength="2"
+          placeholder="Name"
+          [ngModel]="name"
+          [required]="true"
+          [(value)]="name"
+        ></app-material-input>
+        <app-material-input
+          name="email"
+          ngDefaultControl
+          pattern="^[A-Za-z0-9_-][A-Za-z0-9_\.-]*(\+[A-Za-z0-9]+)?@([A-Za-z0-9][A-Za-z0-9_-]*\.)*[A-Za-z0-9][A-Za-z0-9_-]{1,62}\.[A-Za-z]{2,3}$"
+          placeholder="E-Mail"
+          [ngModel]="email"
+          [required]="true"
+          [(value)]="email"
+          #emailfield
+        ></app-material-input>
+        <app-material-input
+          name="password"
+          ngDefaultControl
+          minlength="6"
+          placeholder="Password"
+          type="password"
+          [ngModel]="password"
+          [required]="true"
+          [(value)]="password"
+          #passwordfield
+        ></app-material-input>
+        <p>
+          <app-captcha [siteKey]="recaptchaKey" (captchaResponse)="captchaResponse($event)" (captchaExpired)="captchaExpired($event)"></app-captcha>
+        </p>
+      </form>
     </md-card-content>
     <md-card-actions>
-      <button md-raised-button color="primary" (click)="signUp()" [disabled]="!(formIsValid | async)">Sign Up</button>
+      <button md-raised-button color="primary" (click)="signUp()" [disabled]="!form.form.valid" #signup>Sign Up</button>
     </md-card-actions>
   </md-card>
   <div flex="30"></div>

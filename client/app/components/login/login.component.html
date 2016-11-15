@@ -3,18 +3,34 @@
   <md-card flex="40">
     <md-card-title>Log In</md-card-title>
     <md-card-content>
-      <p *ngIf="hasError" class="error">
-        <strong>Error:</strong> {{errorMessage}}
-      </p>
-      <p>
-        <md-input [(ngModel)]="email" placeholder="E-Mail"></md-input>
-      </p>
-      <p>
-        <md-input type="password" [(ngModel)]="password" placeholder="Password" (keyup.enter)="login()"></md-input>
-      </p>
+      <form #form="ngForm">
+        <p *ngIf="hasError" class="error">
+          <strong>Error:</strong> {{errorMessage}}
+        </p>
+        <app-material-input
+          name="email"
+          ngDefaultControl
+          pattern="^[A-Za-z0-9_-][A-Za-z0-9_\.-]*(\+[A-Za-z0-9]+)?@([A-Za-z0-9][A-Za-z0-9_-]*\.)*[A-Za-z0-9][A-Za-z0-9_-]{1,62}\.[A-Za-z]{2,3}$"
+          placeholder="E-Mail"
+          [ngModel]="email"
+          [required]="true"
+          [(value)]="email"
+        ></app-material-input>
+        <app-material-input
+          minlength="6"
+          name="password"
+          ngDefaultControl
+          placeholder="Password"
+          type="password"
+          (onEnter)="login()"
+          [ngModel]="password"
+          [required]="true"
+          [(value)]="password"
+        ></app-material-input>
+      </form>
     </md-card-content>
     <md-card-actions>
-      <button md-raised-button color="primary" (click)="login()">Log In</button>
+      <button md-raised-button color="primary" (click)="login()" [disabled]="!form.form.valid">Log In</button>
     </md-card-actions>
   </md-card>
   <div flex="30"></div>

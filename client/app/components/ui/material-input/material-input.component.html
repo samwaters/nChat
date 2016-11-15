@@ -1,0 +1,16 @@
+<div>
+  <md-icon *ngIf="!model.valid && !model.pristine" class="error">error</md-icon>
+  <md-icon *ngIf="model.valid && !model.pristine" class="success">check circle</md-icon>
+  <md-input
+    minlength="{{minlength}}"
+    name="{{name}}"
+    pattern="{{pattern}}"
+    placeholder="{{placeholder}}"
+    type="{{type}}"
+    [(ngModel)]="value"
+    [required]="required"
+    (keyup.enter)="enter()"
+    #current
+    #model="ngModel"
+  ></md-input>
+</div>

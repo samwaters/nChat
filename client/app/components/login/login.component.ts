@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {AngularFire, FirebaseAuthState} from 'angularfire2';
 import {Router} from '@angular/router';
 import {FirebaseService} from '../../services/firebase.service';
@@ -17,6 +17,8 @@ export class LoginComponent implements OnInit {
   // Models attached to template
   public email:string;
   public password:string;
+  @ViewChild('form')
+  private _form;
 
   constructor(private fbService:FirebaseService, private af:AngularFire, private router:Router, private ws:WebsocketService) {
     this._auth$ = this.af.auth.subscribe((auth:FirebaseAuthState) => {
@@ -30,14 +32,19 @@ export class LoginComponent implements OnInit {
   }
 
   public login() {
-    this.fbService.logIn(this.email, this.password)
-      .then(() => {
-        this.ws.connect();
-        this.router.navigate(['/chat']);
-      }, (err) => {
-        this.hasError = true;
-        this.errorMessage = err.message;
-      });
+    if(this._form.form.valid) {
+      this.fbService.logIn(this.email, this.password)
+        .then(() => {
+          this.ws.connect();
+          this.router.navigate(['/chat']);
+        }, (err) => {
+          this.hasError = true;
+          this.errorMessage = err.message;
+        });
+    } else {
+      this.hasError = true;
+      this.errorMessage = 'Please fix the highlighted errors before continuing';
+    }
   }
 
   ngOnInit() {

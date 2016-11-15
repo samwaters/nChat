@@ -18,7 +18,7 @@ import {FlexDirective, LayoutDirective} from './directives/flex.directive';
 import { UserComponent } from './components/user/user.component';
 import {EffectsModule} from '@ngrx/effects';
 import {UserEffects} from './effects/user.effects';
-import { MessagingInputComponent } from './components/messaging-input/messaging-input.component';
+import { MessagingInputComponent } from './components/ui/messaging-input/messaging-input.component';
 import {MessageService} from './services/message.service';
 import {messageReducer} from './reducers/message.reducer';
 import {MessageEffects} from './effects/message.effects';
@@ -35,6 +35,7 @@ import {FirebaseService} from './services/firebase.service';
 import {ChatAuthGuard} from './guards/chat.guard';
 import { CaptchaComponent } from './components/captcha/captcha.component';
 import {CaptchaService} from './services/captcha.service';
+import { MaterialInputComponent } from './components/ui/material-input/material-input.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import {CaptchaService} from './services/captcha.service';
     LoginComponent,
     ChatComponent,
     AuthComponent,
-    CaptchaComponent
+    CaptchaComponent,
+    MaterialInputComponent
   ],
   imports: [
     BrowserModule,

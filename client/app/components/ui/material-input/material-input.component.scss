@@ -1,0 +1,12 @@
+div { position:relative; }
+md-input { width:100%; }
+md-icon {
+  position:absolute; right:0;
+  &.error {
+    color:#D8000C;
+  }
+  &.success {
+    color: #4F8A10;
+  }
+}
+
