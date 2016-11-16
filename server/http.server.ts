@@ -1,6 +1,6 @@
 import {config} from '../config/server.config';
 import * as express from 'express';
-import index from './http/index.route';
+import api from './http/api.route';
 
 export class HttpServer {
   private _server:express.Express;
@@ -11,6 +11,7 @@ export class HttpServer {
   }
 
   private _configureRoutes() {
-    this._server.use('/', index);
+    this._server.use('/api', api);
+    this._server.use('/', express.static('dist'));
   }
 }
