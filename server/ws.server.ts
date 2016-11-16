@@ -10,13 +10,13 @@ interface NamedWebSocket extends WebSocket {
   id?:string;
 }
 
-export class Server {
+export class WebsocketServer {
   private clients:Array<any> = [];
   private websocketServer:WSServer;
 
   constructor() {
     this.websocketServer = new WSServer({
-      port: config.port
+      port: config.ports.ws
     });
     this.websocketServer.on('connection', (conn:NamedWebSocket) => { this._acceptConnection(conn); });
   }

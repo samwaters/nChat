@@ -1,4 +1,7 @@
 export const config = {
   allowedOrigins: ['*'],
-  port: 9002
+  ports: {
+    http:8080,
+    ws: 9002
+  }
 };
