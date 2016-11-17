@@ -36,6 +36,7 @@ import {ChatAuthGuard} from './guards/chat.guard';
 import { CaptchaComponent } from './components/captcha/captcha.component';
 import {CaptchaService} from './services/captcha.service';
 import { MaterialInputComponent } from './components/input/material-input/material-input.component';
+import {CryptService} from './services/crypt.service';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,7 @@ import { MaterialInputComponent } from './components/input/material-input/materi
     ),
     AngularFireModule.initializeApp(firebaseConfig, firebaseAuthConfig)
   ],
-  providers: [UserService, WebsocketService, MessageService, ThemeService, FirebaseService, CaptchaService, ChatAuthGuard],
+  providers: [UserService, WebsocketService, MessageService, ThemeService, FirebaseService, CaptchaService, CryptService, ChatAuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
