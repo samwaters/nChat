@@ -2,7 +2,7 @@ import * as request from 'request';
 import {Router, Request, Response} from 'express';
 import * as bodyParser from 'body-parser';
 import {config} from '../../config/server.config';
-import {Crypt} from './lib/crypt';
+import {Crypt, keyType} from './lib/crypt';
 import {HeaderUtils} from './lib/headers';
 
 const api = Router();
@@ -37,10 +37,12 @@ api.options('/users/verify', (req:Request, res:Response) => {
 });
 api.post('/users/verify', jsonParser, (req:Request, res:Response) => {
   HeaderUtils.addDefaultHeaders(res);
-  if(req.body && req.body.enc) {
+  if(req.body && req.body.message && req.body.publicKey) {
+    let decrypted = Crypt.decrypt(req.body.message);
+    let decoded = JSON.parse(decrypted);
     let response = {
       status: 'OK',
-      message: Crypt.decrypt(req.body.enc)
+      message: Crypt.encrypt('Your name is ' + decoded.name, keyType.CUSTOM_PUBLIC, req.body.publicKey)
     };
     res.send(JSON.stringify(response));
   } else {
