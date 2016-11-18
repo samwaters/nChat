@@ -2,7 +2,7 @@ declare class JSEncryptRSAKey {
   constructor();
 }
 declare class JSEncrypt {
-  constructor();
+  constructor(options?:any);
   decrypt(text:string):string;
   encrypt(text:string):string;
   getPrivateKey():JSEncryptRSAKey;
