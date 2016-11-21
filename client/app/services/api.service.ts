@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import {Headers, Http, Response} from '@angular/http';
 import {clientConfig} from '../../../config/client.config';
 import {BehaviorSubject, Observable, ReplaySubject} from 'rxjs';
+let enc = require('jsencrypt');
 
 @Injectable()
 export class ApiService {
@@ -14,7 +15,7 @@ export class ApiService {
     this.ready = new BehaviorSubject<boolean>(false);
     this._generateKeyPair(clientConfig.defaultKeySize);
     this._getServerPublicKey();
-    this._clientCrypt = new JSEncrypt({default_key_size: clientConfig.defaultKeySize});
+    this._clientCrypt = new enc.JSEncrypt({default_key_size: clientConfig.defaultKeySize});
   }
 
   /*
@@ -44,7 +45,6 @@ export class ApiService {
       request = this.http.get(endpoint, {headers: headers});
     }
     request.take(1).subscribe((res:Response) => {
-      console.log('Trying to decrypt', res.json().message);
       let decrypted = this._clientCrypt.decrypt(res.json().message);
       response.next(decrypted);
     });
@@ -60,15 +60,14 @@ export class ApiService {
   }
 
   private _generateKeyPair(size:number) {
-    this._clientCrypt = new JSEncrypt({default_key_size:size});
-    console.log('KEYS', this._clientCrypt.getPrivateKeyB64(), this._clientCrypt.getPublicKeyB64());
+    this._clientCrypt = new enc.JSEncrypt({default_key_size:size});
   }
 
   private _getServerPublicKey() {
     this.http.get(clientConfig.keyServer + '/public').take(1).subscribe((res:Response) => {
       let decoded:any = res.json();
       if(decoded.status && decoded.key) {
-        this._serverCrypt = new JSEncrypt();
+        this._serverCrypt = new enc.JSEncrypt();
         this._serverCrypt.setKey(decoded.key);
         this.ready.next(true);
       } else {
