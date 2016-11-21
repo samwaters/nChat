@@ -13,6 +13,9 @@ import {SignupComponent} from './components/signup/signup.component';
 import {UserComponent} from './components/user/user.component';
 import {UsersComponent} from './components/users/users.component';
 
+// Dialogs
+import {CryptoDialogComponent} from './components/dialogs/crypto-dialog/crypto-dialog.component';
+
 // Directives
 import {FlexDirective, LayoutDirective} from './directives/flex.directive';
 
@@ -52,12 +55,14 @@ import {firebaseConfig, firebaseAuthConfig} from '../../config/firebase.config';
 import {routing} from './app.routes';
 import {storeLogger} from 'ngrx-store-logger';
 
+
 @NgModule({
   declarations: [
     AppComponent,
     AuthComponent,
     CaptchaComponent,
     ChatComponent,
+    CryptoDialogComponent,
     FlexDirective,
     LayoutDirective,
     LoginComponent,
@@ -69,6 +74,9 @@ import {storeLogger} from 'ngrx-store-logger';
     SignupComponent,
     UserComponent,
     UsersComponent
+  ],
+  entryComponents: [
+    CryptoDialogComponent
   ],
   imports: [
     AngularFireModule.initializeApp(firebaseConfig, firebaseAuthConfig),
