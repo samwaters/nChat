@@ -9,7 +9,32 @@
     </md-tab>
     <md-tab label="Encryption">
       <div class="tab-content">
-        Settings 2
+        <md-card>
+          <md-card-title>Client Keys</md-card-title>
+          <md-card-content>
+            <label for="cPrivate">Private Key</label>
+            <textarea id="cPrivate">{{(settings | async).keys.client.privateKey}}</textarea>
+            <label for="cPublic">Public Key</label>
+            <textarea id="cPublic">{{(settings | async).keys.client.publicKey}}</textarea>
+          </md-card-content>
+          <md-card-footer>
+            <label for="keySize">Key Size</label>
+            <select id="keySize" [(ngModel)]="keySize">
+              <option value="1024">1024</option>
+              <option value="2048">2048</option>
+              <option value="4096">4096</option>
+            </select>
+            <button md-button (click)="generateKeys()">Generate Keys</button>
+          </md-card-footer>
+        </md-card>
+        <md-card>
+          <md-card-title>Server Keys</md-card-title>
+          <md-card-content>
+            <label for="sPublic">Public Key</label>
+            <textarea id="sPublic">{{(settings | async).keys.server.publicKey}}</textarea>
+          </md-card-content>
+          <md-card-footer>RELOAD</md-card-footer>
+        </md-card>
       </div>
     </md-tab>
     <md-tab label="Advanced">
