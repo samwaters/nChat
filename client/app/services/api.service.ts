@@ -3,19 +3,42 @@ import { Injectable } from '@angular/core';
 import {Headers, Http, Response} from '@angular/http';
 import {clientConfig} from '../../../config/client.config';
 import {BehaviorSubject, Observable, ReplaySubject} from 'rxjs';
+import {Store} from '@ngrx/store';
+import {settingsActions} from '../reducers/settings.reducer';
 let enc = require('jsencrypt');
+
+interface AppState {
+  messages: Array<any>;
+  settings:any;
+  users: Array<any>;
+}
 
 @Injectable()
 export class ApiService {
   private _serverCrypt:JSEncrypt;
   private _clientCrypt:JSEncrypt;
   public ready:BehaviorSubject<boolean>;
+  private _settings:Observable<any>;
 
-  constructor(private http:Http) {
+  constructor(private http:Http, private store:Store<AppState>) {
     this.ready = new BehaviorSubject<boolean>(false);
-    this._generateKeyPair(clientConfig.defaultKeySize);
-    this._getServerPublicKey();
-    this._clientCrypt = new enc.JSEncrypt({default_key_size: clientConfig.defaultKeySize});
+    this.store.dispatch(settingsActions.generateClientKeyPair(clientConfig.defaultKeySize));
+    this.store.dispatch(settingsActions.requestServerPublicKey());
+    this._settings = store.select('settings');
+    this._settings.subscribe((settings) => {
+      if(
+        settings.keys.client.privateKey !== ''
+        && settings.keys.client.publicKey !== ''
+        && settings.keys.server.publicKey !== ''
+      ) {
+        this._clientCrypt = new enc.JSEncrypt();
+        this._clientCrypt.setPrivateKey(settings.keys.client.privateKey);
+        //this._clientCrypt.setPublicKey(settings.keys.client.publicKey);
+        this._serverCrypt = new enc.JSEncrypt();
+        this._serverCrypt.setPublicKey(settings.keys.server.publicKey);
+        this.ready.next(true);
+      }
+    });
   }
 
   /*
@@ -57,22 +80,5 @@ export class ApiService {
 
   public getServerPublicKey():string {
     return this._serverCrypt.getPublicKeyB64();
-  }
-
-  private _generateKeyPair(size:number) {
-    this._clientCrypt = new enc.JSEncrypt({default_key_size:size});
-  }
-
-  private _getServerPublicKey() {
-    this.http.get(clientConfig.keyServer + '/public').take(1).subscribe((res:Response) => {
-      let decoded:any = res.json();
-      if(decoded.status && decoded.key) {
-        this._serverCrypt = new enc.JSEncrypt();
-        this._serverCrypt.setKey(decoded.key);
-        this.ready.next(true);
-      } else {
-        throw new Error('Could not contact key server');
-      }
-    });
   }
 }

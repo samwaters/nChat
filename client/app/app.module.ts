@@ -22,6 +22,7 @@ import {FlexDirective, LayoutDirective} from './directives/flex.directive';
 // Effects
 import {EffectsModule} from '@ngrx/effects';
 import {MessageEffects} from './effects/message.effects';
+import {SettingsEffects} from './effects/settings.effects';
 import {UserEffects} from './effects/user.effects';
 
 // Guards
@@ -38,6 +39,7 @@ import {NgModule} from '@angular/core';
 
 // Reducers
 import {messageReducer} from './reducers/message.reducer';
+import {settingsReducer} from './reducers/settings.reducer';
 import {userReducer} from './reducers/user.reducer';
 
 // Services
@@ -82,13 +84,14 @@ import 'hammerjs';
     AngularFireModule.initializeApp(firebaseConfig, firebaseAuthConfig),
     BrowserModule,
     EffectsModule.run(MessageEffects),
+    EffectsModule.run(SettingsEffects),
     EffectsModule.run(UserEffects),
     FormsModule,
     HttpModule,
     MaterialModule.forRoot(),
     routing,
     StoreModule.provideStore(
-      compose(storeLogger(), combineReducers)({messages:messageReducer, users: userReducer})
+      compose(storeLogger(), combineReducers)({messages:messageReducer, settings:settingsReducer, users: userReducer})
     )
   ],
   providers: [
