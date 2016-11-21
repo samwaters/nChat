@@ -8,8 +8,11 @@
     </span>
   </span>
   <span>
+    <button md-button (click)="showSettingsDialog()">
+      <md-icon>settings</md-icon>
+    </button>
     <button md-button [md-menu-trigger-for]="themeMenu">
-      <span>Theme</span>
+      <md-icon>brush</md-icon>
     </button>
     <button md-button md-ripple *ngIf="auth" [md-menu-trigger-for]="userMenu">
     <span>{{auth.auth.email}}</span>

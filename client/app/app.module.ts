@@ -14,7 +14,7 @@ import {UserComponent} from './components/user/user.component';
 import {UsersComponent} from './components/users/users.component';
 
 // Dialogs
-import {CryptoDialogComponent} from './components/dialogs/crypto-dialog/crypto-dialog.component';
+import {SettingsDialogComponent} from './components/dialogs/settings-dialog/settings-dialog.component';
 
 // Directives
 import {FlexDirective, LayoutDirective} from './directives/flex.directive';
@@ -54,7 +54,7 @@ import {compose} from '@ngrx/core/compose';
 import {firebaseConfig, firebaseAuthConfig} from '../../config/firebase.config';
 import {routing} from './app.routes';
 import {storeLogger} from 'ngrx-store-logger';
-
+import 'hammerjs';
 
 @NgModule({
   declarations: [
@@ -62,7 +62,6 @@ import {storeLogger} from 'ngrx-store-logger';
     AuthComponent,
     CaptchaComponent,
     ChatComponent,
-    CryptoDialogComponent,
     FlexDirective,
     LayoutDirective,
     LoginComponent,
@@ -71,12 +70,13 @@ import {storeLogger} from 'ngrx-store-logger';
     MessagingInputComponent,
     MessageComponent,
     NavigationComponent,
+    SettingsDialogComponent,
     SignupComponent,
     UserComponent,
     UsersComponent
   ],
   entryComponents: [
-    CryptoDialogComponent
+    SettingsDialogComponent
   ],
   imports: [
     AngularFireModule.initializeApp(firebaseConfig, firebaseAuthConfig),

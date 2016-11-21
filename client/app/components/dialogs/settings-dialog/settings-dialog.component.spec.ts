@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { CryptoDialogComponent } from './crypto-dialog.component';
+import { SettingsDialogComponent } from './settings-dialog.component';
 
-describe('CryptoDialogComponent', () => {
-  let component: CryptoDialogComponent;
-  let fixture: ComponentFixture<CryptoDialogComponent>;
+describe('SettingsDialogComponent', () => {
+  let component: SettingsDialogComponent;
+  let fixture: ComponentFixture<SettingsDialogComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CryptoDialogComponent ]
+      declarations: [ SettingsDialogComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CryptoDialogComponent);
+    fixture = TestBed.createComponent(SettingsDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
