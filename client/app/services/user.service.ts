@@ -2,17 +2,13 @@ import { Injectable } from '@angular/core';
 import {Store} from '@ngrx/store';
 import {Observable} from 'rxjs';
 import {userActions} from '../reducers/user.reducer';
-
-interface AppState {
-  messages: Array<any>;
-  users: Array<any>;
-}
+import {IAppState} from '../reducers/state.interface';
 
 @Injectable()
 export class UserService {
   public users:Observable<any>;
 
-  constructor(private store:Store<AppState>) {
+  constructor(private store:Store<IAppState>) {
     this.users = store.select('users');
   }
 

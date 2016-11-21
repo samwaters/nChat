@@ -5,13 +5,8 @@ import {clientConfig} from '../../../config/client.config';
 import {BehaviorSubject, Observable, ReplaySubject} from 'rxjs';
 import {Store} from '@ngrx/store';
 import {settingsActions} from '../reducers/settings.reducer';
+import {IAppState} from '../reducers/state.interface';
 let enc = require('jsencrypt');
-
-interface AppState {
-  messages: Array<any>;
-  settings:any;
-  users: Array<any>;
-}
 
 @Injectable()
 export class ApiService {
@@ -20,7 +15,7 @@ export class ApiService {
   public ready:BehaviorSubject<boolean>;
   private _settings:Observable<any>;
 
-  constructor(private http:Http, private store:Store<AppState>) {
+  constructor(private http:Http, private store:Store<IAppState>) {
     this.ready = new BehaviorSubject<boolean>(false);
     this.store.dispatch(settingsActions.generateClientKeyPair(clientConfig.defaultKeySize));
     this.store.dispatch(settingsActions.requestServerPublicKey());
