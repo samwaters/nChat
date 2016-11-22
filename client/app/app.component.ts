@@ -9,7 +9,7 @@ import {ThemeService} from './services/theme.service';
 export class AppComponent {
   constructor(private themeService:ThemeService, private el:ElementRef) {
     themeService.currentTheme.subscribe((theme:string) => {
-      this.el.nativeElement.className = theme;
+      this.el.nativeElement.parentNode.className = theme;
     })
   }
 }
