@@ -44,7 +44,7 @@ export class NavigationComponent implements OnInit {
   }
 
   public showSettingsDialog() {
-    this.dialog.open(SettingsDialogComponent, {});
+    this.dialog.open(SettingsDialogComponent);
   }
 
   public get themes():Array<any> {

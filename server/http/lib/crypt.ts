@@ -75,14 +75,19 @@ export class Crypt {
     if(Crypt.inited) {
       return;
     }
-    fs.readFile(__dirname + '../../../../config/keys/private.key', 'utf8', (err, data) => {
-      if(!err) {
+    fs.readFile(__dirname + '/../../../config/keys/private.key', 'utf8', (err, data) => {
+      if(err) {
+        console.log(err.message);
+      } else {
         Crypt.keys.privateKey = data;
         Crypt._privateKey = new NodeRSA(Crypt.keys.privateKey, {'encryptionScheme': 'pkcs1'});
+
       }
     });
-    fs.readFile(__dirname + '../../../../config/keys/public.key', 'utf8', (err, data) => {
-      if(!err) {
+    fs.readFile(__dirname + '/../../../config/keys/public.key', 'utf8', (err, data) => {
+      if(err) {
+        console.log(err.message);
+      } else {
         Crypt.keys.publicKey = data;
         Crypt._publicKey = new NodeRSA(Crypt.keys.publicKey, {'encryptionScheme': 'pkcs1'});
       }
