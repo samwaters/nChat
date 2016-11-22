@@ -37,6 +37,9 @@ import {FormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 import {NgModule} from '@angular/core';
 
+// Pipes
+import {RsaKeyPipe} from './pipes/rsakey.pipe';
+
 // Reducers
 import {messageReducer} from './reducers/message.reducer';
 import {settingsReducer} from './reducers/settings.reducer';
@@ -72,6 +75,7 @@ import 'hammerjs';
     MessagingInputComponent,
     MessageComponent,
     NavigationComponent,
+    RsaKeyPipe,
     SettingsDialogComponent,
     SignupComponent,
     UserComponent,

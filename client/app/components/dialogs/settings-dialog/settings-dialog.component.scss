@@ -1,0 +1,23 @@
+.tab-content { padding:10px 0; }
+.dialog-footer { padding-top:5px; text-align:right; }
+.keyTitle { margin:0; }
+.key {
+  background-color: #ddd;
+  border: 1px solid #999;
+  border-radius: 5px;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+  font-size:12px;
+  max-width: 600px;
+  margin-bottom:5px;
+  overflow-x:auto;
+  padding: 5px;
+}
+.sizeWarning { color:red; font-size:.7em; padding-top:2px; }
+md-card-title { font-size:18px; }
+md-card-content { padding-bottom:5px; }
+md-card-footer {
+  .md-footer-buttons {
+    padding: 5px 24px;
+    .right { text-align:right; }
+  }
+}

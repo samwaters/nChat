@@ -12,7 +12,7 @@ export class SettingsEffects {
     .ofType(settingsActionTypes.GENERATE_CLIENT_KEYPAIR)
     .map(action => {
       let crypt:JSEncrypt = new enc.JSEncrypt({default_key_size:action.payload});
-      return settingsActions.storeClientKeyPair(crypt.getPrivateKeyB64(), crypt.getPublicKeyB64());
+      return settingsActions.storeClientKeyPair(crypt.getPrivateKeyB64(), crypt.getPublicKeyB64(), action.payload);
     });
   @Effect() requestServerPublicKey$ = this.actions$
     .ofType(settingsActionTypes.REQUEST_SERVER_PUBLICKEY)

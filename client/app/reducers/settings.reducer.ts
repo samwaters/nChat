@@ -8,6 +8,7 @@ export const settingsActionTypes = {
 
 const initialState = {
   keys: {
+    clientKeySize: 1024,
     client: {privateKey:'', publicKey:''},
     server: {privateKey:'', publicKey:''}
   }
@@ -32,10 +33,11 @@ export const settingsActions:ISettingsActions = {
       type: settingsActionTypes.REQUEST_SERVER_PUBLICKEY
     }
   },
-  storeClientKeyPair: (privateKey:string, publicKey:string) => {
+  storeClientKeyPair: (privateKey:string, publicKey:string, size:number) => {
     return {
       type: settingsActionTypes.STORE_CLIENT_KEYPAIR,
       payload: {
+        keySize: size,
         privateKey: privateKey,
         publicKey: publicKey
       }
@@ -53,6 +55,7 @@ export const settingsReducer:ActionReducer<any> = (state:any = initialState, act
   let mutatedState = Object.assign({}, state);
   switch(action.type) {
     case settingsActionTypes.STORE_CLIENT_KEYPAIR:
+      mutatedState.keys.clientKeySize = action.payload.keySize;
       mutatedState.keys.client = {
         privateKey: action.payload.privateKey,
         publicKey: action.payload.publicKey
